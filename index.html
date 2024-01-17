@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Timetable Creator</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/bootstrap-colorpicker.min.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap-colorpicker.min.js"></script>
+	<script type="text/javascript" src="js/scripts.js"></script>
+	<script type="text/javascript" src="js/canva.js"></script>
+	<script type="text/javascript" src="js/lib1.js"></script>
+	<script type="text/javascript" src="js/lib2.js"></script>
+	<script type="text/javascript" src="js/ics.js"></script>
+	<script type="text/javascript" src="js/lib3.js"></script>
+
+</head>
+
+<body>
+
+<div class="container">
+	<div class="row clearfix">
+		<div class=" text-center mt-5 ">
+        	<h1>Timetable Creator</h1>  
+			<h4>IIT Madras</h4>
+        </div>
+	</div>
+	
+	<div class="row clearfix">
+		<div class="col-md-10 column">
+		<div class="row clearfix align-items-end" id="inputrow">
+
+		<div class="col-md-2 column">
+			<label for="ccode">Course code or name</label>
+			<input type=text class="form-control" id=ccode placeholder="" required="required" data-error="Code is required"/>
+		</div>
+		
+		<div class="col-md-1 column"><div class="input-group">
+			<label for="cslots">Slots *</label>
+			<input type=text class="form-control" id=cslots placeholder="" required="required" data-error="Slot is required."/>
+		</div>
+	</div>
+
+		<div class="col-md-2 column">
+			<label for="cvenue">Venue</label>
+			<input type=text class="form-control" id=cvenue placeholder=""/>
+		</div>
+
+    	<div class="col-md-2 column input-group picker">
+			<label for="color" style="display: block;">Color</label>
+			<div class="input-group" style="width: 100%;">
+				<input type="text" placeholder="BG color" id="color" value="rgba(255, 255, 0, 0.36)" class="form-control colorpicker-input" />
+				<span class="input-group-addon colorpicker-input-addon"></span>
+			</div>
+		</div>		
+		
+		<div class="row clearfix" id="buttonrow">
+		
+			<div class="col-md-1 column">
+				<label style="visibility: hidden;">....</label>
+				<button class="btn btn-primary" onclick="addCourse($('#ccode').val(),$('#cslots').val(),$('#cvenue').val(), $('#color').val())">Add</button>
+			</div>
+		
+			<div class="col-md-2 column">
+				<label style="visibility: hidden;">....</label>
+				<button class="btn btn-secondary togglebtn active" id="snametog" onclick="toggleSlot()">Hide slot names</button>
+			</div>
+		</div>
+		
+		</div>
+
+		<div class="row">&nbsp;</div> 
+		<div class="row clearfix">
+		<div class="col-md-12 column">
+			<table class="table table-bordered table-striped" style="text-align:center" id="table_final">
+				<tr>
+					<tr>
+						<th rowspan="2" colspan="2" scope="col">Days</th>
+						<th rowspan="2" colspan="2">8:00 - <br>8:50</th>
+						<th rowspan="2" colspan="2">9:00 - <br>9:50</th>
+						<th rowspan="2" colspan="2">10:00 - <br>10:50</th>
+						<th rowspan="2" colspan="2">11:00 - <br>11:50</th>
+						<th rowspan="11" colspan="1" style="text-align: center;">Lunch<br/><br/><br/><br></br></br>12.00 - 12.50</td>
+						<th rowspan="2" colspan="2">13:00 - <br>13:50</th>
+						<th rowspan="2" colspan="8" style="width: 3cm;">14:00 - <br>16:45</th>
+						<th rowspan="2" colspan="2">17:00 - <br>17:50</th>
+
+					</tr>
+				</tr>
+				<tr>
+					<tr>
+						<td rowspan="2" colspan="2" class="mon">Mon</td>
+						<td rowspan="2" colspan="2" class="mon f slot-A"><span class="slot-name">A</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+						<td rowspan="2" colspan="2" class="mon s slot-B"><span class="slot-name">B</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+						<td rowspan="2" colspan="2" class="mon th slot-C"><span class="slot-name">C</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+						<td rowspan="2" colspan="2" class="mon fo slot-D"><span class="slot-name">D</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+						<td rowspan="2" colspan="2" class="mon fi slot-G"><span class="slot-name">G</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+						<td rowspan="2" colspan="8" class="mon si slot-P"><span class="slot-name">P</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+						<td rowspan="2" colspan="2" class="mon se slot-J"><span class="slot-name">J/J3</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+					</tr>
+				</tr>
+
+				<tr>
+					<tr>
+						<td rowspan="2" colspan="2" class="tue">Tue</td>
+						<td rowspan="2" colspan="2" class="tue f slot-B"><span class="slot-name">B</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+						<td rowspan="2" colspan="2" class="tue s slot-C"><span class="slot-name">C</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+						<td rowspan="2" colspan="2" class="tue th slot-D"><span class="slot-name">D</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+						<td rowspan="2" colspan="2" class="tue fo slot-E"><span class="slot-name">E</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+						<td rowspan="2" colspan="2" class="tue fi slot-A"><span class="slot-name">A</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+						<td rowspan="2" colspan="8" class="tue si slot-Q"><span class="slot-name">Q</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+						<td rowspan="2" colspan="2" class="tue se slot-F"><span class="slot-name">F</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+					</tr>
+				</tr>
+
+				<tr>
+					<tr>
+						<td rowspan="2" colspan="2" class="wed">Wed</td>
+						<td rowspan="2" colspan="2" class="wed f slot-C"><span class="slot-name">C</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+						<td rowspan="2" colspan="2" class="wed s slot-D"><span class="slot-name">D</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+						<td rowspan="2" colspan="2" class="wed th slot-E"><span class="slot-name">E</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+						<td rowspan="2" colspan="2" class="wed fo slot-F"><span class="slot-name">F</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+						<td rowspan="2" colspan="2" class="wed fi slot-B"><span class="slot-name">B</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+						<td rowspan="2" colspan="8" class="wed si slot-R"><span class="slot-name">R</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+						<td rowspan="2" colspan="2" class="wed se slot-G"><span class="slot-name">G</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+					</tr>
+				</tr>
+
+				<tr>
+					<tr>
+						<td rowspan="2" colspan="2" class="thu">Thu</td>
+						<td rowspan="2" colspan="2" class="thu f slot-E"><span class="slot-name">E</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+						<td rowspan="2" colspan="2" class="thu s slot-F"><span class="slot-name">F</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+						<td rowspan="2" colspan="2" class="thu th slot-G"><span class="slot-name">G</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+						<td rowspan="2" colspan="2" class="thu fo slot-A"><span class="slot-name">A</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+						<td rowspan="2" colspan="2" class="thu fi slot-D"><span class="slot-name">D</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+						<td rowspan="2" colspan="8" class="thu si slot-S"><span class="slot-name">S</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+						<td rowspan="2" colspan="2" class="thu se slot-H"><span class="slot-name">H/H3</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+					</tr>
+				</tr>
+
+				<tr>
+					<tr>
+						<td rowspan="1" colspan="2" class="fri">Fri</td>
+						<td rowspan="1" colspan="2" class="fri f slot-1 slot-F"><span class="slot-name">F</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+						<td rowspan="1" colspan="2" class="fri s slot-4 slot-G"><span class="slot-name">G</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+						<td rowspan="1" colspan="2" class="fri th slot-7 slot-A"><span class="slot-name">A</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+						<td rowspan="1" colspan="2" class="fri fo slot-3 slot-B"><span class="slot-name">B</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+						<td rowspan="1" colspan="2" class="fri fi slot-7 slot-C"><span class="slot-name">C</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+						<td rowspan="1" colspan="8" class="fri si slot-7 slot-T"><span class="slot-name">T</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+						<td rowspan="1" colspan="2" class="fri se slot-7 slot-E"><span class="slot-name">E</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+					</tr>
+				</tr>
+
+			</table>
+
+		</div>
+		</div>
+		</div>
+		<div class="col-md-2 column"><br><br><br><br>
+			<button class="btn btn-default form-control"  style="z-index:2" onclick="downloadAsImage()">Download as image</button>
+			<button class="btn btn-default form-control"  style="z-index:2" onclick="downloadAsPdf()">Download as PDF</button>
+			<a style="z-index:2; margin-top:2px;margin-bottom:2px" class="btn form-control btn-default input-block-level" id=perma href>Permalink</a>
+			
+			<button class="btn btn-default form-control" style="z-index: 2" onclick="openDatePicker()">Export as .ics</button>
+
+			<div id="overlay">
+				<div id="datePickerContainer">
+						<label for="startDate">Start Date:</label>
+						<input type="date" id="startDate" name="startDate">
+			
+						<label for="endDate">End Date:</label>
+						<input type="date" id="endDate" name="endDate">
+			
+						<button type="submit" value="Submit" onclick="downloadAsIcs()">Download as ics</button>
+				</div>
+			</div>
+
+			
+			<table class="table table-striped table-hover">
+				<thead>
+					<tr>
+						
+						<th colspan=2>
+							Course list
+						</th>
+					</tr>
+				</thead>
+				<tbody id="listb">
+				
+				</tbody>
+			</table>
+		</div>
+		
+	</div>
+</div>
+
+
+</body>
+</html>
+
+
