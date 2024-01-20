@@ -1,0 +1,33 @@
+.buttons-section {
+        margin-top: 50px;
+        display: flex;
+        justify-content: center;
+      }
+      .buttons {
+        display: inline-block;
+        
+      }
+      .add-button,
+      .hide-slots-button {
+        height: 36px;
+        width: 200px;
+        background-color: lightblue;
+        border-color: grey;
+        border-width: 2px;
+        border-style: solid;
+        border-radius: 2px;
+        margin-right: 8px;
+        font-size: 20px;
+        transition: background-color 0.15s;
+        transition: background-color 0.15s;
+      }
+
+      .add-button:hover,
+      .hide-slots-button:hover {
+        background-color: rgb(84, 186, 220);
+     
+      }
+      .add-button:active,
+      .hide-slots-button:active {
+        opacity: 0.75;
+      }

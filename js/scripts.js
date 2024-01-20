@@ -33,37 +33,45 @@ function slotexpand(slotnames){
 	}
 	return finalslots;
 }
- function addCourse(coursename,slots,venue,color){
-	 console.log(color);
-	 eslots=slotexpand(slots);
-	 
-	 slotid=coursename+"-"+eslots.join("-");
-	 slotid="i-"+slotid.replace(/[^A-Za-z0-9\-\_\:\.]/ig,'-');
-	courses[slotid]={"name":coursename,"slots":eslots,"venue":venue, "color" : color};
-	for(aslot in eslots){
-		if($('.slot-'+eslots[aslot]).length<=0){
-			alert("Slot "+eslots[aslot]+" does not exist");
-			return false;
-		}
-	}
+function addCourse(coursename, slots, venue, color) {
+    console.log(color);
+    eslots = slotexpand(slots);
+
+    slotid = coursename + "-" + eslots.join("-");
+    slotid = "i-" + slotid.replace(/[^A-Za-z0-9\-\_\:\.]/ig, '-');
+    courses[slotid] = { "name": coursename, "slots": eslots, "venue": venue, "color": color };
+    for (aslot in eslots) {
+        if ($('.slot-' + eslots[aslot]).length <= 0) {
+            alert("Slot " + eslots[aslot] + " does not exist");
+            return false;
+        }
+    }
 	
-	 for (aslot in eslots){
-		 eslots[aslot]=new String(eslots[aslot]);
-		if($('.slot-'+eslots[aslot]+'.used').length>0||$('.slot-clash-'+eslots[aslot]+'.used').length>0){
-			 var arr=$('.slot-'+eslots[aslot]+'.used,.slot-clash-'+eslots[aslot]+'.used').map(function(){return $(this).find('.slot-name').html()+" ("+$(this).find('.course-name').html()+")"}).get()
-			 var arr2=$('.slot-'+eslots[aslot]+'.used,.slot-clash-'+eslots[aslot]+'.used').map(function(){return $(this).find('.course-name').html()}).get()
-			$('.course-name').each(function(){if(arr2.indexOf(this.innerHTML)!=-1){$(this).parents(".used").addClass('softDanger')}})
-			$('.slot-'+eslots[aslot]+'.used,.slot-clash-'+eslots[aslot]+'.used').addClass('dangerRem').removeClass("softDanger")
-			eslots[aslot].nooverwrite=!confirm("Slot clash of "+eslots[aslot]+" with "+arr.join(", ")+", overwrite other course or cancel this one?");
-			$('.used').removeClass('dangerRem').removeClass('softDanger')
-			if(!eslots[aslot].nooverwrite){
-				$('.slot-'+eslots[aslot]+'.used,.slot-clash-'+eslots[aslot]+'.used').each(function(){$('.rmslot[data-slotid='+$(this).data('slotid')+']').click()});
-			}else{
-				delete courses[slotid];
-				return true;
-			}
-		}
-	 }
+	for (aslot in eslots) {
+        eslots[aslot] = new String(eslots[aslot]);
+        if ($('.slot-' + eslots[aslot] + '.used').length > 0 || $('.slot-clash-' + eslots[aslot] + '.used').length > 0) {
+            var arr = $('.slot-' + eslots[aslot] + '.used,.slot-clash-' + eslots[aslot] + '.used').map(function () {
+                return $(this).find('.slot-name').html() + " (" + $(this).find('.course-name').html() + ")"
+            }).get();
+            var arr2 = $('.slot-' + eslots[aslot] + '.used,.slot-clash-' + eslots[aslot] + '.used').map(function () {
+                return $(this).find('.course-name').html()
+            }).get()
+            $('.course-name').each(function () {
+                if (arr2.indexOf(this.innerHTML) != -1) {
+                    $(this).parents(".used").addClass('softDanger')
+                }
+            })
+            $('.slot-' + eslots[aslot] + '.used,.slot-clash-' + eslots[aslot] + '.used').addClass('dangerRem').removeClass("softDanger")
+            eslots[aslot].nooverwrite = !confirm("Slot clash of " + eslots[aslot] + " with " + arr.join(", ") + ", overwrite other course or cancel this one?");
+            $('.used').removeClass('dangerRem').removeClass('softDanger')
+            if (!eslots[aslot].nooverwrite) {
+                $('.slot-' + eslots[aslot] + '.used,.slot-clash-' + eslots[aslot] + '.used').each(function () { $('.rmslot[data-slotid=' + $(this).data('slotid') + ']').click() });
+            } else {
+                delete courses[slotid];
+                return true;
+            }
+        }
+    }
 	 
 	 for (aslot in eslots){
 		 console.log(eslots[aslot]+" "+eslots[aslot].overwrite)
@@ -74,8 +82,9 @@ function slotexpand(slotnames){
 			$slot.find('.course-venue').html(venue);
 			$slot.data('slotid',slotid)
 		}
-	 }
-	 $('<tr id="list-'+slotid+'"><td><button type="button" class="btn btn-default btn-xs list-'+slotid+' " id="color-button-'+slotid+'"><span class="glyphicon glyphicon-pencil"></span></button></td><td id="list-name-'+slotid+'">'+coursename+'</td><td><button class="rmslot  btn-xs btn btn btn-danger" data-slotid="'+slotid+'">x</button></td></tr>').appendTo('#listb')
+	}
+
+	$('<tr id="list-'+slotid+'"><td><button type="button" class="btn btn-default btn-xs list-'+slotid+' " id="color-button-'+slotid+'"><span class="glyphicon glyphicon-pencil"></span></button></td><td id="list-name-'+slotid+'">'+coursename+'</td><td><button class="rmslot  btn-xs btn btn btn-danger" data-slotid="'+slotid+'">x</button></td></tr>').appendTo('#listb')
 	$('#color-button-' + slotid).attr('style', 'background-color:'+color+' !important')
 	.colorpicker({format: "rgba", color:color}).on('changeColor', function(ev){
 		var rgbc = ev.color.toRGB();
@@ -91,7 +100,6 @@ function slotexpand(slotnames){
 	});
 	 updatePerma()
 	 $("#inputrow input:not(#color)").val("");
-	 // 	$("#color").val("rgba(255, 255, 0, 0.36)"); // the previous used default color
  }
  
 
@@ -147,6 +155,7 @@ $(document).ready(function(){
 	var slotid=$(this).data('slotid');
 	 slotid=slotid.replace(/\s/ig,'-');
 	var slots=courses[slotid].slots;
+	
 	for(i in slots){
 		var $slot=$('.slot-'+slots[i]);
 		$slot.find('.course-name').html("");

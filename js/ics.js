@@ -502,6 +502,10 @@ function downloadAsIcs() {
             time = '14:00-16:45';
         } else if (className === 'se') {
             time = '17:00-17:50';
+        } else if (className === 'ei') {
+            time = '14:00-15:15';
+        } else if (className === 'ni') {
+            time = '15:15-16:45';
         }
       });
 

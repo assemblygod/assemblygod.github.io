@@ -1,0 +1,12 @@
+.save-options{
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%
+}
+.save-buttons{
+  width: 400px;
+  height: 36px;
+  background-color: lightblue;
+}
