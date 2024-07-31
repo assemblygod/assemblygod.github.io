@@ -478,74 +478,73 @@ function downloadAsIcs() {
 
   var cal = ics();
 
-  $('body').find('td.used').each(function () {
-      var venue = $(this).find('.course-venue').text();
-		  var course = $(this).find('.course-name').text();
+  $('#table_final').find('td').each(function () {
+      var venue = $(this).find('.course-venue').text() || null;
+      var course = $(this).find('.course-name').text();
 
-      var classes = $(this).attr('class').split(' ');
+      if (course) {
+          var classes = $(this).attr('class').split(' ');
 
-      var day;
-      var time;
+          var day;
+          var time;
 
-      classes.forEach(function (className) {
-        if (className === 'f') {
-            time = '8:00-8:50';
-        } else if (className === 's') {
-            time = '9:00-9:50';
-        } else if (className === 'th') {
-            time = '10:00-10:50';
-        } else if (className === 'fo') {
-            time = '11:00-11:50';
-        } else if (className === 'fi') {
-            time = '13:00-13:50';
-        } else if (className === 'si') {
-            time = '14:00-16:45';
-        } else if (className === 'se') {
-            time = '17:00-17:50';
-        } else if (className === 'ei') {
-            time = '14:00-15:15';
-        } else if (className === 'ni') {
-            time = '15:15-16:45';
-        }
-      });
+          classes.forEach(function (className) {
+              if (className === 'f') {
+                  time = '8:00-8:50';
+              } else if (className === 's') {
+                  time = '9:00-9:50';
+              } else if (className === 'th') {
+                  time = '10:00-10:50';
+              } else if (className === 'fo') {
+                  time = '11:00-11:50';
+              } else if (className === 'fi') {
+                  time = '13:00-13:50';
+              } else if (className === 'si') {
+                  time = '14:00-16:45';
+              } else if (className === 'se') {
+                  time = '17:00-17:50';
+              } else if (className === 'ei') {
+                  time = '14:00-15:15';
+              } else if (className === 'ni') {
+                  time = '15:15-16:45';
+              } else if (className == 'ex') {
+                  time = '12:00-12:50'; // Lunch time slot
+              }
+          });
 
-      classes.forEach(function (className) {
-        if (className === 'mon') {
-            day = 'Mon';
-        } else if (className === 'tue') {
-            day = 'Tue';
-        } else if (className === 'wed') {
-            day = 'Wed';
-        } else if (className === 'thu') {
-            day = 'Thu'
-        } else if (className === 'fri') {
-            day = 'Fri'
-        }
-    
-      });
+          classes.forEach(function (className) {
+              if (className === 'mon' || className === 'l1') {
+                  day = 'Mon';
+              } else if (className === 'tue' || className === 'l2') {
+                  day = 'Tue';
+              } else if (className === 'wed' || className === 'l3') {
+                  day = 'Wed';
+              } else if (className === 'thu' || className === 'l4') {
+                  day = 'Thu';
+              } else if (className === 'fri' || className === 'l5') {
+                  day = 'Fri';
+              }
+          });
 
-      console.log(day, time)
+          if (day && time) {
+              var [startHour, startMinute, endHour, endMinute] = time.split(/[:-]/).map(part => parseInt(part));
 
-      if (day && time) {
-        var [startHour, startMinute, endHour, endMinute] = time.split(/[:-]/).map(part => parseInt(part));
+              var eventStartDate = new Date(startDate);
+              eventStartDate.setHours(startHour, startMinute, 0, 0);
 
-        var eventStartDate = new Date(startDate);
-        eventStartDate.setHours(startHour, startMinute, 0, 0);
+              var eventEndDate = new Date(startDate);
+              eventEndDate.setHours(endHour, endMinute, 0, 0);
 
-        var eventEndDate = new Date(startDate);
-        eventEndDate.setHours(endHour, endMinute, 0, 0);
+              var dayIndex = getDayIndex(day);
+              var daysDifference = (dayIndex - eventStartDate.getDay());
 
-        var dayIndex = getDayIndex(day);
-        var daysDifference = (dayIndex - eventStartDate.getDay());
-        
-        if (daysDifference < 0)   daysDifference = (daysDifference + 7) % 7;
-          
-        eventStartDate.setDate(eventStartDate.getDate() + daysDifference);
-        eventEndDate.setDate(eventEndDate.getDate() + daysDifference);
+              if (daysDifference < 0) daysDifference = (daysDifference + 7) % 7;
 
-        console.log(eventStartDate, eventEndDate)
+              eventStartDate.setDate(eventStartDate.getDate() + daysDifference);
+              eventEndDate.setDate(eventEndDate.getDate() + daysDifference);
 
-        cal.addEvent(course, venue, eventStartDate, eventEndDate, { freq: 'WEEKLY', until: endDate });
+              cal.addEvent(course, venue, eventStartDate, eventEndDate, { freq: 'WEEKLY', until: endDate });
+          }
       }
   });
 
@@ -556,3 +555,40 @@ function getDayIndex(day) {
   return ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(day);
 }
 
+$('#table_final').on('click', '.remove-instance', function() {
+  console.log('Cross button clicked');
+
+  var slotname = $(this).data('slot').toString().trim(); 
+  var $slot = $(this).closest('.slot-' + slotname);
+
+  if ($slot.length === 0) {
+      console.error('Slot not found for slot name:', slotname);
+      return;
+  }
+
+  var slotid = $slot.data('slotid');
+  var course = courses[slotid];
+
+  if (!course) {
+      console.error('Course not found for slot ID:', slotid);
+      return;
+  }
+
+  var slots = course.slots;
+  var slotIndex = slots.findIndex(function(slot) {
+      return slot === slotname;
+  });
+
+  if (slotIndex === -1) {
+      console.error('Slot name not found in course slots:', slotname);
+      return;
+  }
+
+  slots.splice(slotIndex, 1);
+  if (slots.length === 0) {
+      delete courses[slotid];
+  }
+
+  $slot.html('');
+  updateTableAndLocalStorage();
+});

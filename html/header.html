@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../css/header.css" rel="stylesheet">
+</head>
+
+<header>
+
+  <!-- <span class="box"> -->
+        <div class="header box">
+            <div class="heading">
+                <a class="heading1" href="https://youtu.be/G4XASALzvQs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreenhref ">IIT Madras->Timetable Creator</a>
+            </div>
+        </div>
+  <!-- </span> -->
+    
+</header>
+
+<body >
+    <div>
+        <div style="color: #003366">
+            **Please select l1/ l2/ l3/ l4/ l5 as lunch slots
+          </div>
+    <div style="display: flex; justify-content: center; align-items: center; text-align: center;">
+        <div class="input-row" style = "grid-template-columns: 1fr 1fr 1fr 1fr; display: grid" id="inputrow" >
+            <div class="course">
+                <div class="input-box">
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="ccode"
+                        placeholder="Course"
+                        required="required"
+                        data-error="Code is required"
+                    />
+                </div>
+            </div>
+        
+            <div class="slots">
+                
+                <div class="input-box input-group">
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-question-sign" 
+                           data-toggle="popover" 
+                           data-content="Separate multiple slots with a comma. <br>Slot groups like 'A, B' also allowed" 
+                           data-html="true" 
+                           data-placement="top" 
+                           id="helpicon">
+                        </i>
+                    </span>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="cslots"
+                        placeholder="Slot*"
+                        required="required"
+                        data-error="Slot is required."
+                    />
+                </div>
+                
+            </div>
+        
+            <div class="color" style = "color: black">
+                <div>Color- </div>
+                <input
+                    type="color"
+                    placeholder="BG color"
+                    id="color"
+                    value="#42f5a1"
+                    style="width: 20%;"
+                />
+            </div>
+        
+            <div class="venue">
+                <div class="input-box">
+                    <input type="text" class="form-control" id="cvenue" placeholder="Venue" />
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div style="display: flex; justify-content: center; text-align: center; align-items: center; margin: auto;">
+        <div class="buttons" id="buttonrow">
+            <div class="buttons" style="display: inline; margin: auto;">
+                <label style="visibility: hidden;">....</label>
+                <button class="add-button" onclick="addCourse($('#ccode').val(), $('#cslots').val(), $('#cvenue').val(), $('#color').val())">Add</button>
+            </div>
+            <div class="buttons" style="display: inline; margin: auto;">
+                <label style="visibility: hidden;">....</label>
+                <button class="hide-slots-button" id="snametog" onclick="toggleSlot()">Hide slot names</button>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,124 @@
+@media (prefers-color-scheme: dark) {
+    * {
+	--textcolor: var(--textcolor);
+	--bgcolor: var(--bgcolor); /* #0b0703; #0f0d11 #0d0d0f; #141414; */
+	--highlight: var(--highlight); /* #dd61ce #ba4cac; #ffc400; */
+    }
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box;
+    --textcolor: #dadada;  
+    --bgcolor: #F9F9F9;     
+    /* --highlight: #F5DF50;   */
+    --highlight: #419cdd;
+    --neoncolor: #419cdd;
+    --cursor: #542694;
+    --hovercolor: #3489c6;
+    --shadowcolor: #60b2ec; /* animation */
+    --greencolor: #4CAF50;  /* #16b746; code #53fc5e */
+    --extracolor: #ded63f;  /*#ff60ca; */
+    --extralightcolor: #E49200; /*#7f236e;*/
+  }
+
+
+@font-face {
+    font-family: JetBrains Mono;
+    src: url(fonts/JetBrainsMono-Regular.woff2);
+    font-family: Twemoji;
+    src: url(fonts/twemoji.ttf);
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+html {
+    display: table !important;
+    margin: auto !important;
+}
+
+body {
+    font-family: JetBrains Mono, system-ui, sans-serif;
+    line-height: 1.4;
+    color: var(--textcolor);
+    background: var(--bgcolor);
+    position: absolute;
+
+    display: table-cell;
+    vertical-align: middle;
+}
+
+div {
+    /* padding: 30px;  */
+    margin-bottom: .6em;
+}
+
+header {
+  /* padding: 5vw 5vw 0 5vw; */
+  /* margin-top: 0px; */
+  /* display: flex;
+  flex-wrap: wrap; */
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+
+  margin-top: 2vh;
+}
+
+.input-row {
+    /* margin: 0; */
+    
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /* width: 50vw; */
+}
+
+/* ------- Smaller screens ------- */
+
+/* @media only screen and (max-width: 100) {
+  body { font-size: 16px; }
+  input-row{
+    display: block;
+  }
+}
+
+@media only screen and (max-width: 300px) {
+  nav { width: 100%; } /* Fix for older webkit versions */
+/* } */ 
+
+/* styles/heading.css */
+#header {
+    padding: 20px;
+    text-align: center;
+}
+
+/* styles/table.css */
+#table-btech {
+    padding: 20px;
+}
+
+/* styles/footer.css */
+#footer {
+    padding: 20px;
+    text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #header {
+        padding: 10px;
+    }
+    #table-btech {
+        padding: 10px;
+        font-size: 14px; /* Adjust font size for better readability */
+    }
+    #footer {
+        padding: 10px;
+    }
+}

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timetable</title>
+    <style>
+      .table-div {
+          display: flex;
+          justify-content: center;
+      }
+      table {
+          border-collapse: collapse;
+          width: 80%;
+          margin-top: 20px;
+          background-color: #FFFFFF  !important;
+          color: #dcd61a;
+          border: 1px solid #000;
+      }
+      
+      th, td {
+          border: 2px solid #000;
+          padding: 8px;
+          text-align: center;
+          /* border-top: none;
+          border-bottom: none; */
+          /* background-color: #0e3749; */
+      }
+      .slot-name {
+          display: inline-block;
+          width: 100%;
+      }
+      .mon, .tue, .wed, .thu, .fri, .lunch {
+          height: 50px;
+      }
+      .ex {
+          border-top: none;
+          border-bottom: none;
+      }
+      .slot-L5 {
+          border-bottom: 1px solid #000;
+      }
+
+      .mon, .tue, .wed, .thu, .fri {
+        background-color: #FFFFFF;
+        color: rgb(95, 0, 0);
+        font-weight: bold;
+      }
+      .choot{
+        background-color: #003366 !important;
+      }
+  </style>
+  
+  
+</head>
+<body>
+  <div class = "table-div">
+    <table style="text-align:center; width: 80%;" id ="table_final">
+      <tr class = "choot">
+        <tr>
+          <th class = "choot" rowspan = "2" colspan = "2" scope="col">Days</th>
+          <th class = "choot" rowspan="2" colspan="2">8:00 - <br>8:50</th>
+          <th class = "choot" rowspan="2" colspan="2" >9:00 - <br>9:50</th>
+          <th class = "choot" rowspan="2" colspan="2">10:00 - <br>10:50</th>
+          <th class = "choot" rowspan="2" colspan="2">11:00 - <br>11:50</th>
+          <th class = "choot" rowspan="2" colspan="2" style="text-align: center;">Lunch 12.00 - 12.50</td>
+          <th class = "choot" rowspan="2" colspan="2">13:00 - <br>13:50</th>
+          <th class = "choot" rowspan="2" colspan="2" >14:00 - <br>15:15</th>
+          <th class = "choot" rowspan="2" colspan="2" >15:15 - <br>16:45</th>
+          <th class = "choot" rowspan="2" colspan="2">17:00 - <br>17:50</th>
+
+        </tr>
+      </tr>
+
+      <tr>
+        <tr>
+          <td rowspan="4" colspan="2" class="mon" style="background-color: #003366; color: #dcd61a;">Mon</td>
+          <td rowspan="4" colspan="2" class="mon f slot-A"><span class="slot-name">A</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+          <td rowspan="4" colspan="2" class="mon s slot-B"><span class="slot-name">B</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+          <td rowspan="4" colspan="2" class="mon th slot-C"><span class="slot-name">C</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+          <td rowspan="4" colspan="2" class="mon fo slot-D"><span class="slot-name">D</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+          <td rowspan="4" colspan="2" class="mon ex slot-L1"><span class="slot-name"> </span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+          <td rowspan="4" colspan="2" class="mon fi slot-G"><span class="slot-name">G</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+          <td rowspan="2" colspan="4" class="mon si slot-P"><span class="slot-name">P</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+          <td rowspan="4" colspan="2" class="mon se slot-J"><span class="slot-name">J</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+        </tr>
+      </tr>
+
+  <tr>
+  <tr>
+    <td colspan="2" rowspan="2" class="mon ei slot-H"><span class="slot-name">H</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+    <td colspan="2" rowspan="2" class="mon ni slot-M"><span class="slot-name">M</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+  </tr>
+  </tr>
+      <tr>
+        <tr>
+          <td rowspan="4" colspan="2" class="tue" style="background-color: #003366; color: #dcd61a; !important">Tue</td>
+          <td rowspan="4" colspan="2" class="tue f slot-B"><span class="slot-name">B</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+          <td rowspan="4" colspan="2" class="tue s slot-C"><span class="slot-name">C</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+          <td rowspan="4" colspan="2" class="tue th slot-D"><span class="slot-name">D</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+          <td rowspan="4" colspan="2" class="tue fo slot-E"><span class="slot-name">E</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+          <td rowspan="4" colspan="2" class="tue ex slot-L2"><span class="slot-name"> </span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+          <td rowspan="4" colspan="2" class="tue fi slot-A"><span class="slot-name">A</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+          <td rowspan="2" colspan="4" class="tue si slot-Q"><span class="slot-name">Q</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+          <td rowspan="4" colspan="2" class="tue se slot-F"><span class="slot-name">F</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+        </tr>
+      </tr>
+
+  <tr>
+  <tr>
+      <td colspan="2" rowspan="2" class="tue ei slot-M"><span class="slot-name">M</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+      <td colspan="2" rowspan="2" class="tue ni slot-H"><span class="slot-name">H</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+  </tr>
+  </tr>
+
+      <tr>
+        <tr>
+          <td rowspan="4" colspan="2" class="wed" style="background-color: #003366; color: #dcd61a;">Wed</td>
+          <td rowspan="4" colspan="2" class="wed f slot-C"><span class="slot-name">C</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+          <td rowspan="4" colspan="2" class="wed s slot-D"><span class="slot-name">D</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+          <td rowspan="4" colspan="2" class="wed th slot-E"><span class="slot-name">E</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+          <td rowspan="4" colspan="2" class="wed fo slot-F"><span class="slot-name">F</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+          <td rowspan="4" colspan="2" class="wed ex slot-L3"><span class="slot-name"> </span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+          <td rowspan="4" colspan="2" class="wed fi slot-B"><span class="slot-name">B</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+          <td rowspan="2" colspan="4" class="wed si slot-R"><span class="slot-name">R</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+          <td rowspan="4" colspan="2" class="wed se slot-G"><span class="slot-name">G</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+        </tr>
+      </tr>
+
+  <tr>
+  <tr>
+    <td colspan="2" rowspan="2" class="wed ei slot-J"><span class="slot-name">J</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+    <td colspan="2" rowspan="2" class="wed ni slot-K"><span class="slot-name">K</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+  </tr>
+  </tr>
+
+      <tr>
+        <tr>
+          <td rowspan="4" colspan="2" class="thu" style="background-color: #003366; color: #dcd61a;">Thu</td>
+          <td rowspan="4" colspan="2" class="thu f slot-E"><span class="slot-name">E</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+          <td rowspan="4" colspan="2" class="thu s slot-F"><span class="slot-name">F</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+          <td rowspan="4" colspan="2" class="thu th slot-G"><span class="slot-name">G</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+          <td rowspan="4" colspan="2" class="thu fo slot-A"><span class="slot-name">A</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+          <td rowspan="4" colspan="2" class="thu ex slot-L4"><span class="slot-name"> </span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+          <td rowspan="4" colspan="2" class="thu fi slot-D"><span class="slot-name">D</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+          <td rowspan="2" colspan="4" class="thu si slot-S"><span class="slot-name">S</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+          <td rowspan="4" colspan="2" class="thu se slot-H"><span class="slot-name">H</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+        </tr>
+      </tr>
+
+  <tr>
+  <tr>
+    <td colspan="2" rowspan="2" class="thu ei slot-L"><span class="slot-name">L</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+    <td colspan="2" rowspan="2" class="thu ni slot-J"><span class="slot-name">J</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+  </tr>
+  </tr>
+
+      <tr>
+        <tr>
+          <td rowspan="4" colspan="2" class="fri" style="background-color: #003366; color: #dcd61a;">Fri</td>
+          <td rowspan="4" colspan="2" class="fri f slot-1 slot-F"><span class="slot-name">F</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+          <td rowspan="4" colspan="2" class="fri s slot-4 slot-G"><span class="slot-name">G</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+          <td rowspan="4" colspan="2" class="fri th slot-7 slot-A"><span class="slot-name">A</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+          <td rowspan="4" colspan="2" class="fri fo slot-3 slot-B"><span class="slot-name">B</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+          <td rowspan="4" colspan="2" class="fri ex slot-L5"><span class="slot-name"> </span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+          <td rowspan="4" colspan="2" class="fri fi slot-7 slot-C"><span class="slot-name">C</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+          <td rowspan="2" colspan="4" class="fri si slot-7 slot-T"><span class="slot-name">T</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+          <td rowspan="4" colspan="2" class="fri se slot-7 slot-E"><span class="slot-name">E</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+        </tr>
+      </tr>
+
+  <tr>
+  <tr>
+    <td colspan="2" rowspan="2" class="fri ei slot-K"><span class="slot-name">K</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+    <td colspan="2" rowspan="2" class="fri ni slot-L"><span class="slot-name">L</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
+  </tr>
+  </tr>
+
+
+    </table>
+  </div>
+</body>
+</html>

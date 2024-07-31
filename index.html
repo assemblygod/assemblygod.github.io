@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html style = "padding: 0;">
-  <head>
 
+<html style="padding: 0;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=5.0">
     <link href="styles/heading.css" rel="stylesheet" />
     <link href="styles/inputrow.css" rel="stylesheet" />
     <link href="styles/buttonsection.css" rel="stylesheet" />
@@ -9,8 +11,7 @@
     <link href="styles/save.css" rel="stylesheet" />
     <link href="styles/footer.css" rel="stylesheet" />
     <link href="css/bootstrap.min.css" rel="stylesheet">
-	  <link href="css/bootstrap-colorpicker.min.css" rel="stylesheet">
-	
+    <link href="css/bootstrap-colorpicker.min.css" rel="stylesheet">
 
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
@@ -22,277 +23,41 @@
     <script type="text/javascript" src="js/ics.js"></script>
     <script type="text/javascript" src="js/lib3.js"></script>
 
-    <title>Timetable creator</title>
-  </head>
+    <title>Timetable Creator</title>
+</head>
 
-  <body style = "min-height: 100vh;margin: 0;">
+<body style="margin: 0;min-height: 100vh;min-width: 90vh">
+    <div id="header"></div>
+    <div id="table-btech"></div>
+    <div id="options"></div>
+    <div id="footer"></div>
 
-    <div class = "header">
-      <div class = "logo">      
-        <img src = "images/iitm_logo.jpg" style = "width: 50px;border-radius: 100px;margin-top:10px;">
-      </div>
-    <div class="heading">
-      
-      <div class="heading1">IIT Madras</div>
-      <div class = "heading2">Timetable Creator</div>
-      
-    </div>
-    </div>
-    
-      <div class="input-row" id ="inputrow" >
-        <div class="course">
-          <div class="input-box" >
-            <input
-              type="text"
-              class="form-control"
-              id="ccode"
-              placeholder = "Course"
-              required="required"
-              data-error="Code is required"
-            />
-          </div>
-        </div>
+    <script>
+      $(document).ready(function() {
+          $('#header').load('/html/header.html');
+          $('#table-btech').load('/html/btech.html');
+          $('#footer').load('/html/footer.html');
+          $('#options').load('/html/options.html');
 
-        <div class="slots">
-          <div class="input-box" >
-            <input
-              type="text"
-              class="form-control"
-              id="cslots"
-              placeholder = "Slot*"
-              required="required"
-              data-error="Slot is required."
-            />
-          </div>
-        </div>
+          $(document).ready(function() {
+            $('#header').load('/html/header.html', function() {
+                $('#helpicon').popover({
+                    trigger: 'hover',
+                    html: true,
+                    placement: 'top',
+                    content: 'Separate multiple slots with a comma. <br>Slot groups like \'4\' also allowed'
+                });
+            });
 
-        <div class="color">
-          <div>Color- </div>
-          <input
-            type="color"
-            placeholder="BG color"
-            id="color"
-            value="#A3E147"
-            style = "width:20%"
-          />
-          
-      </div>
+            $('#helpicon').popover({
+                trigger: 'hover',
+                html: true,
+                placement: 'top',
+                content: 'Separate multiple slots with a comma. <br>Slot groups like \'A, B\' also allowed'
+            });
+          });
 
-        <div class="venue">
-          
-          <div class="input-box" >
-            <input type="text" class="form-control" id="cvenue" placeholder = "Venue" />
-          </div>
-        </div>
-
-
-      </div>
-      
-      <div class="buttons-section" id = "buttonrow">
-        <div class="buttons">
-          <label style="visibility: hidden;">....</label>
-          <button class="add-button" onclick="addCourse($('#ccode').val(),$('#cslots').val(),$('#cvenue').val(), $('#color').val())">Add</button>
-
-        </div>
-        <div class="buttons">
-          <label style="visibility: hidden;">....</label>
-          <button class="hide-slots-button" id="snametog" onclick="toggleSlot()">Hide slot names</button>
-          
-        </div>
-      </div>
-
-      <div class = "table-div">
-        <table style="text-align:center; width: 80%;" id ="table_final">
-          <tr>
-            <tr>
-              <th rowspan = "2" colspan = "2" scope="col">Days</th>
-              <th rowspan="2" colspan="2">8:00 - <br>8:50</th>
-              <th rowspan="2" colspan="2" >9:00 - <br>9:50</th>
-              <th rowspan="2" colspan="2">10:00 - <br>10:50</th>
-              <th rowspan="2" colspan="2">11:00 - <br>11:50</th>
-              <th rowspan="21" colspan="2" style="text-align: center;">Lunch 12.00 - 12.50</td>
-              <th rowspan="2" colspan="2">13:00 - <br>13:50</th>
-              <th rowspan="2" colspan="2" >14:00 - <br>15:15</th>
-              <th rowspan="2" colspan="2" >15:15 - <br>16:45</th>
-              <th rowspan="2" colspan="2">17:00 - <br>17:50</th>
-
-            </tr>
-          </tr>
-
-          <tr>
-            <tr>
-              <td rowspan="4" colspan="2" class="mon">Mon</td>
-              <td rowspan="4" colspan="2" class="mon f slot-A"><span class="slot-name">A</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-              <td rowspan="4" colspan="2" class="mon s slot-B"><span class="slot-name">B</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-              <td rowspan="4" colspan="2" class="mon th slot-C"><span class="slot-name">C</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-              <td rowspan="4" colspan="2" class="mon fo slot-D"><span class="slot-name">D</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-              <td rowspan="4" colspan="2" class="mon fi slot-G"><span class="slot-name">G</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-              <td rowspan="2" colspan="4" class="mon si slot-P"><span class="slot-name">P</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-              <td rowspan="4" colspan="2" class="mon se slot-J"><span class="slot-name">J</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-            </tr>
-          </tr>
-
-      <tr>
-      <tr>
-        <td colspan="2" class="mon ei slot-H"><span class="slot-name">H</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-        <td colspan="2" class="mon ni slot-M"><span class="slot-name">M</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-      </tr>
-      </tr>
-          <tr>
-            <tr>
-              <td rowspan="4" colspan="2" class="tue">Tue</td>
-              <td rowspan="4" colspan="2" class="tue f slot-B"><span class="slot-name">B</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-              <td rowspan="4" colspan="2" class="tue s slot-C"><span class="slot-name">C</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-              <td rowspan="4" colspan="2" class="tue th slot-D"><span class="slot-name">D</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-              <td rowspan="4" colspan="2" class="tue fo slot-E"><span class="slot-name">E</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-              <td rowspan="4" colspan="2" class="tue fi slot-A"><span class="slot-name">A</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-              <td rowspan="2" colspan="4" class="tue si slot-Q"><span class="slot-name">Q</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-              <td rowspan="4" colspan="2" class="tue se slot-F"><span class="slot-name">F</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-            </tr>
-          </tr>
-
-      <tr>
-      <tr>
-          <td colspan="2" class="tue ei slot-M"><span class="slot-name">M</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-          <td colspan="2" class="tue ni slot-H"><span class="slot-name">H</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-      </tr>
-      </tr>
-
-          <tr>
-            <tr>
-              <td rowspan="4" colspan="2" class="wed">Wed</td>
-              <td rowspan="4" colspan="2" class="wed f slot-C"><span class="slot-name">C</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-              <td rowspan="4" colspan="2" class="wed s slot-D"><span class="slot-name">D</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-              <td rowspan="4" colspan="2" class="wed th slot-E"><span class="slot-name">E</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-              <td rowspan="4" colspan="2" class="wed fo slot-F"><span class="slot-name">F</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-              <td rowspan="4" colspan="2" class="wed fi slot-B"><span class="slot-name">B</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-              <td rowspan="2" colspan="4" class="wed si slot-R"><span class="slot-name">R</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-              <td rowspan="4" colspan="2" class="wed se slot-G"><span class="slot-name">G</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-            </tr>
-          </tr>
-
-      <tr>
-      <tr>
-        <td colspan="2" class="wed ei slot-J"><span class="slot-name">J</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-        <td colspan="2" class="wed ni slot-K"><span class="slot-name">K</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-      </tr>
-      </tr>
-
-          <tr>
-            <tr>
-              <td rowspan="4" colspan="2" class="thu">Thu</td>
-              <td rowspan="4" colspan="2" class="thu f slot-E"><span class="slot-name">E</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-              <td rowspan="4" colspan="2" class="thu s slot-F"><span class="slot-name">F</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-              <td rowspan="4" colspan="2" class="thu th slot-G"><span class="slot-name">G</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-              <td rowspan="4" colspan="2" class="thu fo slot-A"><span class="slot-name">A</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-              <td rowspan="4" colspan="2" class="thu fi slot-D"><span class="slot-name">D</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-              <td rowspan="2" colspan="4" class="thu si slot-S"><span class="slot-name">S</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-              <td rowspan="4" colspan="2" class="thu se slot-H"><span class="slot-name">H</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-            </tr>
-          </tr>
-
-      <tr>
-      <tr>
-        <td colspan="2" class="thu ei slot-L"><span class="slot-name">L</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-        <td colspan="2" class="thu ni slot-J"><span class="slot-name">J</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-      </tr>
-      </tr>
-
-          <tr>
-            <tr>
-              <td rowspan="4" colspan="2" class="fri">Fri</td>
-              <td rowspan="4" colspan="2" class="fri f slot-1 slot-F"><span class="slot-name">F</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-              <td rowspan="4" colspan="2" class="fri s slot-4 slot-G"><span class="slot-name">G</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-              <td rowspan="4" colspan="2" class="fri th slot-7 slot-A"><span class="slot-name">A</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-              <td rowspan="4" colspan="2" class="fri fo slot-3 slot-B"><span class="slot-name">B</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-              <td rowspan="4" colspan="2" class="fri fi slot-7 slot-C"><span class="slot-name">C</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-              <td rowspan="2" colspan="4" class="fri si slot-7 slot-T"><span class="slot-name">T</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-              <td rowspan="4" colspan="2" class="fri se slot-7 slot-E"><span class="slot-name">E</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-            </tr>
-          </tr>
-
-      <tr>
-      <tr>
-        <td colspan="2" class="fri ei slot-K"><span class="slot-name">K</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-        <td colspan="2" class="fri ni slot-L"><span class="slot-name">L</span><div class="slot-deets"><span class="course-name"></span><div class="course-venue"></div></div></td>
-      </tr>
-      </tr>
-
-
-        </table>
-      </div>
-
-      <div class = "save-options">
-
-        <div>
-          <button onclick="downloadAsImage()" class = "save-buttons">
-            Download as Image
-          </button>
-        </div>
-        <div >
-          <button onclick = "downloadAsPdf()" class = "save-buttons">
-            Download as PDF
-          </button>
-        </div>
-
-        <div>
-          <button class = "save-buttons" onclick="openDatePicker()">
-            Export as .ics
-          </button>
-        </div>
-        <div id="overlay">
-          <div id="datePickerContainer">
-              <label for="startDate">Start Date:</label>
-              <input type="date" id="startDate" name="startDate">
-        
-              <label for="endDate">End Date:</label>
-              <input type="date" id="endDate" name="endDate">
-        
-              <button type="submit" value="Submit" onclick="downloadAsIcs()">Download as ics</button>
-          </div>
-        </div>
-        
-          <table style = "width: 400px; margin-bottom: 2rem;" class="table table-striped table-hover">
-            <thead style = "border:none;">
-              <tr style = "border:none;">
-                <th colspan=4 style = "border:none;">
-                  Course list
-                </th>
-              </tr>
-            </thead>
-            <tbody id="listb">
-            
-            </tbody>
-          </table>
-        
-
-        </div>
-        
-        <footer class = "info">
-
-          <div class = "varinder">
-            <div>Varinder Pal Singh (EE22B151)</div>
-            <div class = "links">
-              <div style = "margin-left: 20px"><a href= "mailto:ee22b151@smail.iitm.ac.in"><img style  = " width: 40px"src = "images/emaillogo.jpeg"></a></div> 
-              <div style = "margin-left: 20px"><a href= "https://github.com/assemblygod/"><img style  = " width: 40px; border-radius: 50%"src = "images/githublogo.jpeg"></a></div> 
-            </div> 
-          </div>
-    
-          <div class = "varun">
-            <div>Varun Bajpai (EE22B152)</div>
-            <div class  = "links">
-              <div style = "margin-left: 55px"><a href= "mailto:ee22b152@smail.iitm.ac.in"><img style  = " width: 40px"src = "images/emaillogo.jpeg"></a></div> 
-              <div style = "margin-left: 20px"><a href= "https://github.com/amberfalcon126"><img style  = " width: 40px; border-radius: 50%"src = "images/githublogo.jpeg"></a></div> 
-            </div>         
-          </div>
-    
-        </footer>
-    
-
-  </body>
-
-
-    
-    
-
+      });
+  </script>
+</body>
 </html>

@@ -29,12 +29,40 @@ background-color: rgba(37, 253, 8, 0.22);
   background-color:rgba(255, 0, 0, 0.20);
 }
 
+@font-face {
+  font-family: JetBrains Mono;
+  src: url(fonts/JetBrainsMono-Regular.woff2);
+  font-family: Twemoji;
+  src: url(fonts/twemoji.ttf);
+}
+
 body {
-  font-family: 'Lato', sans-serif;
-  
+  font-family: JetBrains Mono !important;
+  line-height: 1.4 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100vw;
+  /* position: fixed; */
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+#header, #table-btech, #options, #footer {
+  width: 100%;
+  box-sizing: border-box;
 }
 
 #overlay {
 display: none;
 }
+/* 
+.table-div {
+  /* padding: 30px; */
+ 
+} */
 

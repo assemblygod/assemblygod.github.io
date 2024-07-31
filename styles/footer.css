@@ -4,6 +4,11 @@
   font-size: 1.25em;
   flex: 1;
   align-items: center;
+  justify-content: center;
+  align-items: center;
+  background-color: #003366;
+  color: lightgreen;
+  border-top: 1px solid lightblue;
 }
 
 .links{
